@@ -6,7 +6,8 @@ import pygame
 root = Tk()
 
 # Create listbox
-songs_list = Listbox(root, bg="black", fg="white", width=100, height=30)
+songs_list = Listbox(root, bg="black", fg="white", width=800, height=30)
+
 songs_list.pack()
 
 all_songs = []
@@ -18,6 +19,7 @@ def load_music():
     global all_songs, current_song
     root.directory = filedialog.askdirectory()
     for song in os.listdir(root.directory):
+        # split the file extension from the filename
         name, ext = os.path.splitext(song)
         if ext == ".mp3":
             all_songs.append(song)
@@ -46,22 +48,26 @@ def pause_music():
 
 
 def next():
-    global current_song, is_paused
+    global current_song
+
     try:
         songs_list.selection_clear(0, END)
         songs_list.selection_set(all_songs.index(current_song) + 1)
         current_song = all_songs[songs_list.curselection()[0]]
         play_music()
-    except:
+
+    except (Exception):
         pass
 
 
 def previous():
-    global current_song, is_paused
+    global current_song
+
     try:
         songs_list.selection_clear(0, END)
         songs_list.selection_set(all_songs.index(current_song) - 1)
         current_song = all_songs[songs_list.curselection()[0]]
         play_music()
-    except:
+
+    except (Exception):
         pass

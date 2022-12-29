@@ -12,12 +12,13 @@ from player_actions import (
     pause_music,
     next,
     previous,
+    songs_list,
 )
 
 
 # Configure appearance of GUI
 root.title("Python Music Player")
-root.geometry("800x600")
+root.geometry("800x800+100+100")
 
 # Create menu
 menu_bar = Menu(root)
@@ -32,6 +33,18 @@ pygame.mixer.init()
 
 
 # Populate buttons in GUI
+open_button_frame = Frame(root)
+open_button_frame.pack()
+open_button = Button(
+    open_button_frame,
+    text="Select Music",
+    command=load_music,
+    pady=10,
+    borderwidth=0,
+    bd=0,
+    highlightthickness=0,
+)
+open_button.grid()
 
 play_btn_png = PhotoImage(file="play-button.png")
 pause_btn_png = PhotoImage(file="pause-button.png")
@@ -41,12 +54,37 @@ prev_btn_png = PhotoImage(file="play-previous.png")
 controls_frame = Frame(root)
 controls_frame.pack()
 
-play_btn = Button(controls_frame, image=play_btn_png, borderwidth=0, command=play_music)
-pause_btn = Button(
-    controls_frame, image=pause_btn_png, borderwidth=0, command=pause_music
+play_btn = Button(
+    controls_frame,
+    image=play_btn_png,
+    borderwidth=0,
+    bd=0,
+    highlightthickness=0,
+    command=play_music,
+    padx=0,
+    pady=0,
 )
-next_btn = Button(controls_frame, image=next_btn_png, borderwidth=0, command=next)
-prev_btn = Button(controls_frame, image=prev_btn_png, borderwidth=0, command=previous)
+pause_btn = Button(
+    controls_frame,
+    image=pause_btn_png,
+    borderwidth=0,
+    highlightthickness=0,
+    command=pause_music,
+)
+next_btn = Button(
+    controls_frame,
+    image=next_btn_png,
+    borderwidth=0,
+    highlightthickness=0,
+    command=next,
+)
+prev_btn = Button(
+    controls_frame,
+    image=prev_btn_png,
+    borderwidth=0,
+    highlightthickness=0,
+    command=previous,
+)
 
 prev_btn.grid(row=0, column=0, padx=10, pady=10)
 play_btn.grid(row=0, column=1, padx=10, pady=10)
