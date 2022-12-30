@@ -1,6 +1,5 @@
-from tkinter import filedialog
 from tkinter import *
-import pygame
+from pygame import mixer
 import os
 from player_actions import (
     load_music,
@@ -8,7 +7,7 @@ from player_actions import (
     all_songs,
     current_song,
     is_paused,
-    play_music,
+    play_song,
     pause_music,
     next,
     previous,
@@ -18,7 +17,9 @@ from player_actions import (
 
 # Configure appearance of GUI
 root.title("Python Music Player")
-root.geometry("800x800+100+100")
+root.geometry("800x800+290+85")
+root.configure(bg="#0f1a2b")
+root.resizable(False, False)
 
 # Create menu
 menu_bar = Menu(root)
@@ -29,67 +30,70 @@ organizer_menu.add_command(label="Select a Folder", command=load_music)
 menu_bar.add_cascade(label="Select Music", menu=organizer_menu)
 
 # Initialize pygame mixer module for loading and playing sounds
-pygame.mixer.init()
+mixer.init()
 
 
 # Populate buttons in GUI
-open_button_frame = Frame(root)
-open_button_frame.pack()
 open_button = Button(
-    open_button_frame,
+    root,
     text="Select Music",
     command=load_music,
-    pady=10,
+    width=15,
+    height=2,
+    font=("helvetica", 14, "bold"),
+    fg="black",
+    bg="#21b3de",
     borderwidth=0,
-    bd=0,
     highlightthickness=0,
 )
-open_button.grid()
+open_button.place(x=345, y=520)
 
 play_btn_png = PhotoImage(file="play-button.png")
 pause_btn_png = PhotoImage(file="pause-button.png")
 next_btn_png = PhotoImage(file="play-next.png")
 prev_btn_png = PhotoImage(file="play-previous.png")
 
-controls_frame = Frame(root)
-controls_frame.pack()
+# controls_frame = Frame(root)
+# controls_frame.pack()
 
 play_btn = Button(
-    controls_frame,
+    root,
     image=play_btn_png,
-    borderwidth=0,
     bd=0,
-    highlightthickness=0,
-    command=play_music,
-    padx=0,
-    pady=0,
+    bg="#0f1a2b",
+    command=play_song,
 )
 pause_btn = Button(
-    controls_frame,
+    root,
     image=pause_btn_png,
     borderwidth=0,
     highlightthickness=0,
     command=pause_music,
 )
 next_btn = Button(
-    controls_frame,
+    root,
     image=next_btn_png,
     borderwidth=0,
     highlightthickness=0,
     command=next,
 )
 prev_btn = Button(
-    controls_frame,
+    root,
     image=prev_btn_png,
     borderwidth=0,
     highlightthickness=0,
     command=previous,
 )
 
-prev_btn.grid(row=0, column=0, padx=10, pady=10)
-play_btn.grid(row=0, column=1, padx=10, pady=10)
-pause_btn.grid(row=0, column=2, padx=10, pady=10)
-next_btn.grid(row=0, column=3, padx=10, pady=10)
+prev_btn.place(x=100, y=600)
+play_btn.place(x=250, y=600)
+pause_btn.place(x=400, y=600)
+next_btn.place(x=550, y=600)
+# play_btn.grid(row=0, column=1, padx=10, pady=10)
+# pause_btn.grid(row=0, column=2, padx=10, pady=10)
+# next_btn.grid(row=0, column=3, padx=10, pady=10)
+
+scroll = Scrollbar()
 
 # Put everything on the display and respond to user input until the program terminates
 root.mainloop()

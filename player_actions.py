@@ -1,14 +1,17 @@
 import os
 from tkinter import filedialog
 from tkinter import *
-import pygame
+from pygame import mixer
 
 root = Tk()
 
 # Create listbox
-songs_list = Listbox(root, bg="black", fg="white", width=800, height=30)
+songs_list = Listbox(root, bg="white", fg="black", width=800, height=30, bd=0)
 
 songs_list.pack()
+
+music_label = Label(root, text="", font=("arial", 16, "bold"), fg="black", bg="white")
+music_label.place(x=20, y=480)
 
 all_songs = []
 current_song = None
@@ -25,25 +28,27 @@ def load_music():
             all_songs.append(song)
 
     for song in all_songs:
-        songs_list.insert("end", song)
+        songs_list.insert(END, song)
 
     songs_list.selection_set(0)
     current_song = all_songs[songs_list.curselection()[0]]
 
 
-def play_music():
+def play_song():
     global current_song, is_paused
+    song_info = songs_list.get(ACTIVE)
     if not is_paused:
-        pygame.mixer.music.load(os.path.join(root.directory, current_song))
-        pygame.mixer.music.play()
+        mixer.music.load(os.path.join(root.directory, current_song))
+        mixer.music.play()
+        music_label.config(text=song_info[0:-4])
     else:
-        pygame.mixer.music.unpause()
+        mixer.music.unpause()
         is_paused = False
 
 
 def pause_music():
     global is_paused
-    pygame.mixer.music.pause()
+    mixer.music.pause()
     is_paused = True
 
 
