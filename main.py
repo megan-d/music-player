@@ -4,11 +4,11 @@ import os
 from player_actions import (
     load_music,
     root,
-    all_songs,
     play_song,
     pause_music,
     songs_list,
     next_song,
+    previous_song,
 )
 
 
@@ -71,15 +71,15 @@ next_btn = Button(
     highlightthickness=0,
     command=next_song,
 )
-# prev_btn = Button(
-#     root,
-#     image=prev_btn_png,
-#     borderwidth=0,
-#     highlightthickness=0,
-#     command=previous,
-# )
+prev_btn = Button(
+    root,
+    image=prev_btn_png,
+    borderwidth=0,
+    highlightthickness=0,
+    command=previous_song,
+)
 
-# prev_btn.place(x=100, y=600)
+prev_btn.place(x=100, y=600)
 play_btn.place(x=250, y=600)
 pause_btn.place(x=400, y=600)
 next_btn.place(x=550, y=600)

@@ -72,14 +72,16 @@ def next_song():
         pass
 
 
-# def previous_song():
-#     global current_song
+def previous_song():
+    global current_song
 
-#     try:
-#         songs_list.selection_clear(0, END)
-#         songs_list.selection_set(all_songs.index(current_song) - 1)
-#         current_song = all_songs[songs_list.curselection()[0]]
-#         play_music()
+    try:
+        songs_list.selection_clear(0, END)
+        songs_list.selection_set(all_songs.index(current_song) - 1)
+        current_song = all_songs[songs_list.curselection()[0]]
+        mixer.music.load(current_song)
+        mixer.music.play()
+        music_label.config(text=current_song[0:-4])
 
-#     except (Exception):
-#         pass
+    except (Exception):
+        pass
