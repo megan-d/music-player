@@ -5,13 +5,10 @@ from player_actions import (
     load_music,
     root,
     all_songs,
-    current_song,
-    is_paused,
     play_song,
     pause_music,
-    next,
-    previous,
     songs_list,
+    next_song,
 )
 
 
@@ -53,9 +50,6 @@ pause_btn_png = PhotoImage(file="pause-button.png")
 next_btn_png = PhotoImage(file="play-next.png")
 prev_btn_png = PhotoImage(file="play-previous.png")
 
-# controls_frame = Frame(root)
-# controls_frame.pack()
-
 play_btn = Button(
     root,
     image=play_btn_png,
@@ -75,23 +69,20 @@ next_btn = Button(
     image=next_btn_png,
     borderwidth=0,
     highlightthickness=0,
-    command=next,
+    command=next_song,
 )
-prev_btn = Button(
-    root,
-    image=prev_btn_png,
-    borderwidth=0,
-    highlightthickness=0,
-    command=previous,
-)
+# prev_btn = Button(
+#     root,
+#     image=prev_btn_png,
+#     borderwidth=0,
+#     highlightthickness=0,
+#     command=previous,
+# )
 
-prev_btn.place(x=100, y=600)
+# prev_btn.place(x=100, y=600)
 play_btn.place(x=250, y=600)
 pause_btn.place(x=400, y=600)
 next_btn.place(x=550, y=600)
-# play_btn.grid(row=0, column=1, padx=10, pady=10)
-# pause_btn.grid(row=0, column=2, padx=10, pady=10)
-# next_btn.grid(row=0, column=3, padx=10, pady=10)
 
 scroll = Scrollbar()
 
